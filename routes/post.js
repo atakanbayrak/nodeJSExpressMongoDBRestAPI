@@ -3,7 +3,7 @@ const { getPosts, createPosts, getDetail, getUpdate, deletePosts } = require('..
 
 const router = express.Router()
 
-
+//crud operations
 router.get('/getPosts', getPosts)
 router.post('/createPosts', createPosts)
 router.get('/getDetail/:id', getDetail)

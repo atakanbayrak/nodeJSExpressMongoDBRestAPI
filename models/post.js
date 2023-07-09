@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+//model class
 const PostSchema = new mongoose.Schema({
     name:{
         type: String,

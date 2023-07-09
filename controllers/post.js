@@ -1,5 +1,6 @@
 const PostSchema = require('../models/post.js')
 
+//async functions
 const createPosts = async(req,res) => {
     try {
         const newPost = await PostSchema.create(req.body)
