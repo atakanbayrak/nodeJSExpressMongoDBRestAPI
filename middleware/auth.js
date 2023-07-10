@@ -1,11 +1,25 @@
-const express = require('express')
+const jwt = require('jsonwebtoken')
 
-const router = express.Router()
+const auth = async(req,res,next) => {
+    try {
+        const token = req.headers.authorization.split(" ")[0]
+        let decodedData 
+        
+        if(token){
+            decodedData = jwt.verify(token, process.env.SECRET_TOKEN)
 
+            req.userId = decodedData?.id 
+        }
+        else {
+            decodedData = jwt.decode(token)
 
-router.get('/getPosts', getPosts)
-router.get('/getDetail/:id', getDetail)
-router.get('/getUpdate/:id', getUpdate)
-router.get('/deletePost/:id', deletePost)
+            req.userId = decodedData?.sub
+        }
 
-module.exports = router
+        next()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = auth
